@@ -1,0 +1,39 @@
+.wrapper {
+  --dv-background-color: var(--mantine-color-body);
+  --dv-paneview-active-outline-color: var(--mantine-primary-color-light-color);
+  --dv-tabs-and-actions-container-font-size: var(--mantine-font-size-sm);
+  --dv-tabs-and-actions-container-height: rem(20px);
+  --dv-drag-over-background-color: var(--mantine-color-gray-light);
+  --dv-drag-over-border-color: light-dark(var(--mantine-color-dark), var(--mantine-color-white));
+  --dv-tabs-container-scrollbar-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-gray-6));
+  --dv-icon-hover-background-color: var(--mantine-color-gray-light);
+  --dv-floating-box-shadow: var(--mantine-shadow-sm);
+  --dv-group-view-background-color: var(--mantine-color-body);
+  --dv-activegroup-hiddenpanel-tab-background-color: var(--mantine-color-gray-light);
+  --dv-tab-divider-color: var(--mantine-color-body);
+  --dv-inactivegroup-hiddenpanel-tab-background-color: light-dark(
+    var(--mantine-color-gray-2),
+    var(--mantine-color-dark-6)
+  );
+  --dv-inactivegroup-visiblepanel-tab-background-color: light-dark(
+    var(--mantine-color-gray-3),
+    var(--mantine-color-dark-4)
+  );
+  --dv-separator-border: light-dark(var(--mantine-color-gray-3), var(--mantine-color-gray-7));
+  --dv-paneview-header-border-color: var(--mantine-color-gray-light);
+  --dv-tabs-and-actions-container-background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-dark-6)
+  );
+  --dv-activegroup-visiblepanel-tab-background-color: var(--mantine-primary-color-filled);
+  --dv-activegroup-visiblepanel-tab-color: var(--mantine-color-white);
+  --dv-activegroup-hiddenpanel-tab-color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-0));
+  --dv-inactivegroup-visiblepanel-tab-color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-0));
+  --dv-inactivegroup-hiddenpanel-tab-color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-0));
+
+  :global {
+    .drop-target-selection {
+      transition: transform 0.1s ease-in-out !important;
+    }
+  }
+}
