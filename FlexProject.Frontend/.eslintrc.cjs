@@ -6,6 +6,9 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
   settings: {
+    react: {
+      version: 'detect',
+    },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
@@ -44,7 +47,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
-      parserOptions: { project: ['./tsconfig.json'] },
+      parserOptions: { project: ['./tsconfig.json', './tsconfig.node.json'] },
     },
   ],
 };

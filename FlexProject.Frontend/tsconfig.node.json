@@ -4,5 +4,5 @@
     "module": "esnext",
     "moduleResolution": "bundler"
   },
-  "include": ["vite.config.ts", "package.json"]
+  "include": ["vite.config.ts", "package.json", ".eslintrc.cjs"]
 }

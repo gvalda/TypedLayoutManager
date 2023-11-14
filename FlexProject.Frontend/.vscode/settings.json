@@ -4,5 +4,6 @@
   },
   "cssModules.pathAlias": {
     "@styles": "${workspaceFolder}/src/styles"
-  }
+  },
+  "cSpell.words": ["Dockview"]
 }

@@ -1,5 +1,5 @@
 .wrapper {
-  --dv-background-color: var(--mantine-color-body);
+  --dv-background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
   --dv-paneview-active-outline-color: var(--mantine-primary-color-light-color);
   --dv-tabs-and-actions-container-font-size: var(--mantine-font-size-sm);
   --dv-tabs-and-actions-container-height: rem(20px);
@@ -23,7 +23,7 @@
   --dv-paneview-header-border-color: var(--mantine-color-gray-light);
   --dv-tabs-and-actions-container-background-color: light-dark(
     var(--mantine-color-gray-0),
-    var(--mantine-color-dark-6)
+    var(--mantine-color-dark-8)
   );
   --dv-activegroup-visiblepanel-tab-background-color: var(--mantine-primary-color-filled);
   --dv-activegroup-visiblepanel-tab-color: var(--mantine-color-white);

@@ -1,4 +1,3 @@
-import { Layout } from '@/components/Layout';
 import { DEFAULT_SITE_TITLE } from '@/constants';
 import { useDocumentTitle } from '@mantine/hooks';
 import { Outlet, useRouter } from '@tanstack/react-router';
@@ -10,9 +9,5 @@ export function RootPage() {
 
   useDocumentTitle(matchWithTitle?.context.title || DEFAULT_SITE_TITLE);
 
-  return (
-    <Layout>
-      <Outlet />
-    </Layout>
-  );
+  return <Outlet />;
 }

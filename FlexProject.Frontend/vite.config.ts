@@ -23,7 +23,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: readdirSync(path.resolve(__dirname, 'src/styles/global/'))
-          .map(file => `@import "./src/styles/global/${file}";\n`)
+          .map(file => `@use "./src/styles/global/${file}" as *;\n`)
           .join(''),
       },
     },

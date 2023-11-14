@@ -1,7 +1,11 @@
-import { DockViewPage } from '@/pages/DockViewPage';
-import { Route, Router, RouterContext } from '@tanstack/react-router';
 import { DEFAULT_SITE_TITLE } from '@/constants';
+import { WorkspacePage } from '@/pages/WorkspacePage';
+import { LayoutPage } from '@/pages/LayoutPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 import { RootPage } from '@/pages/RootPage';
+import { workspaceSchema } from '@/workspaceConfiguration';
+import { Route, Router, RouterContext } from '@tanstack/react-router';
+import { defaultTo, first, keys, pipe } from 'lodash/fp';
 
 const routerContext = new RouterContext<{
   title: string;
@@ -9,20 +13,27 @@ const routerContext = new RouterContext<{
 
 const rootRoute = routerContext.createRootRoute({ component: RootPage });
 
-export const dockViewRoute = new Route({
+const layoutRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: DockViewPage,
-  beforeLoad: () => ({ title: 'Dock View' }),
+  component: LayoutPage,
 });
 
-export const newChatRoute = new Route({
-  getParentRoute: () => dockViewRoute,
-  path: '/new-chat',
-  beforeLoad: () => ({ title: 'New Chat' }),
+export const workspaceRoute = new Route({
+  getParentRoute: () => layoutRoute,
+  path: 'workspace',
+  component: WorkspacePage,
+  validateSearch: workspaceSchema,
+  loaderContext: ({ search }) => ({ title: pipe(keys, first, defaultTo('Workspace'))(search) }),
 });
 
-const routeTree = rootRoute.addChildren([dockViewRoute.addChildren([newChatRoute])]);
+const allMatches = new Route({
+  getParentRoute: () => layoutRoute,
+  path: '*',
+  component: NotFoundPage,
+});
+
+const routeTree = rootRoute.addChildren([layoutRoute.addChildren([workspaceRoute, allMatches])]);
 
 export const router = new Router({ routeTree, context: { title: DEFAULT_SITE_TITLE } });
 
