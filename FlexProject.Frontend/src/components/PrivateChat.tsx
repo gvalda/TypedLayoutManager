@@ -2,7 +2,7 @@ import { IDockviewPanelProps } from 'dockview';
 import React from 'react';
 
 export interface PrivateChatProps {
-  userName?: string;
+  userName: string;
 }
 
 export function PrivateChat(props: IDockviewPanelProps<PrivateChatProps>) {

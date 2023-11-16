@@ -8,12 +8,12 @@ import { Provider } from 'react-redux';
 
 export function App() {
   return (
-    // <React.StrictMode>
-    <Provider store={store}>
-      <MantineProvider>
-        <RouterProvider router={router} />
-      </MantineProvider>
-    </Provider>
-    // </React.StrictMode>
+    <React.StrictMode>
+      <Provider store={store}>
+        <MantineProvider>
+          <RouterProvider router={router} />
+        </MantineProvider>
+      </Provider>
+    </React.StrictMode>
   );
 }
