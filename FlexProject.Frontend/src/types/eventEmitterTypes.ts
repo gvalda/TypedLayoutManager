@@ -1,5 +1,4 @@
-export type StringKey<T> = keyof T extends string ? keyof T : never;
-export type Action<T> = (props: T) => void;
+import { Action, StringKey } from '@/types/commonTypes';
 
 export interface EmitterWrapper {
   on: <T extends object, TKey extends StringKey<T>>(event: TKey, fn: Action<T[TKey]>) => void;

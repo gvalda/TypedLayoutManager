@@ -1,5 +1,5 @@
 import Emitter from '@/services/emitter';
-import { StringKey } from '@/types/eventEmitterTypes';
+import { StringKey } from '@/types/commonTypes';
 
 export const usePub =
   <T extends object>() =>

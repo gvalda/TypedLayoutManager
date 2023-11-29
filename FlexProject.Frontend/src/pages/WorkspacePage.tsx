@@ -2,41 +2,35 @@
 import 'dockview/dist/styles/dockview.css';
 import styles from '@styles/pages/Workspace.module.scss';
 
-import { useWorkspace } from '@/hooks/useWorkspace';
+import { WorkspaceProps, useWorkspace } from '@/hooks/useWorkspace';
 import cx from 'clsx';
 import { DockviewReact } from 'dockview';
 import React from 'react';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useNavigate, useRouteContext } from '@tanstack/react-router';
 import { workspaceRoute } from '@/router';
-import { toAction } from '@/utils';
+import { toAction } from '@/utils/commonUtils';
 import { LoadingComponent } from '@/components/LoadingComponent';
 import { useDidUpdate } from '@mantine/hooks';
-import { chain } from 'lodash';
+import { mapValues } from 'lodash';
 import { registeredPanels } from '@/workspaceConfiguration';
+import { getRouteParam } from '@/utils/workspaceUtils';
 
 export function WorkspacePage() {
-  const searchProps = useSearch({ from: workspaceRoute.id });
+  const params = useRouteContext({ from: workspaceRoute.id });
   const navigate = useNavigate({ from: workspaceRoute.id });
 
-  useDidUpdate(() => {
-    console.log('searchProps.privateChat', searchProps.privateChat);
-  }, [searchProps.privateChat]);
+  const onReady = () => displayPanel(params);
+  useDidUpdate(() => displayPanel(params), [params.panelName, params.panelProps]);
 
-  const onReady = () => displayPanel(searchProps.privateChat + '');
-  const onDidActivePanelChange = (id: string) => {
-    console.log('onDidActivePanelChange', id);
-    return toAction(navigate({ search: { privateChat: id } }));
-  };
+  const onDidActivePanelChange: WorkspaceProps['onDidActivePanelChange'] = (panelName, panel) =>
+    toAction(navigate({ params: { routeParamName: getRouteParam(panelName) }, search: panel.params }));
 
   const { setApi, displayPanel } = useWorkspace({ onReady, onDidActivePanelChange });
 
   return (
     <DockviewReact
       className={cx('dockview-theme-vs', styles.wrapper)}
-      components={chain(registeredPanels)
-        .keyBy(p => p.component.name)
-        .mapValues('component')
-        .value()}
+      components={mapValues(registeredPanels, 'component')}
       onReady={event => setApi(event.api)}
       watermarkComponent={LoadingComponent}
       disableFloatingGroups

@@ -1,5 +1,5 @@
 import Emitter from '@/services/emitter';
-import { Action, StringKey } from '@/types/eventEmitterTypes';
+import { Action, StringKey } from '@/types/commonTypes';
 import React from 'react';
 
 export const useSub = <T extends object, TKey extends StringKey<T> = StringKey<T>>(

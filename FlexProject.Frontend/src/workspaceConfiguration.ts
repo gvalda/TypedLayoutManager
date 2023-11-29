@@ -1,26 +1,17 @@
 import { ChatList } from '@/components/ChatList';
-import { PrivateChat } from '@/components/PrivateChat';
-import { WorkspacePanel } from '@/types/workspaceTypes';
-import { typedObjectKeys } from '@/utils';
-import { z } from 'zod';
+import { PrivateChat, privateChatPropsSchema } from '@/components/PrivateChat';
+import { RegisterWorkspacePanel, WorkspacePanel } from '@/types/workspaceTypes';
 
-export const registeredPanels: readonly WorkspacePanel[] = [
-  {
+export const registeredPanels = {
+  privateChat: {
     component: PrivateChat,
-    queryParams: { name: 'chat', value: 'userName' },
-    id: userName => `privateChat-${userName}`,
-    title: userName => userName,
-  },
-  {
+    routeParamName: 'chat',
+    getTitle: props => props.userName,
+    propSchemaParser: privateChatPropsSchema,
+  } as RegisterWorkspacePanel<typeof PrivateChat>,
+  chatList: {
     component: ChatList,
-    queryParamName: 'chats',
-    id: 'chatList',
-    title: 'Chats',
-  },
-] as const;
-
-export type RegisteredPanels = typeof registeredPanels;
-
-export const workspaceSchema = z
-  .record(z.enum(typedObjectKeys(registeredPanels)), z.union([z.string(), z.boolean()]))
-  .refine(obj => Object.keys(obj).length <= 1, { message: 'Workspace schema must have 1 key' });
+    routeParamName: 'chats',
+    getTitle: () => 'Chats',
+  } as RegisterWorkspacePanel<typeof ChatList>,
+} as const satisfies Record<string, WorkspacePanel>;

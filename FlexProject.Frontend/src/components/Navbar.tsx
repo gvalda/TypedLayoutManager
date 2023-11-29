@@ -1,8 +1,10 @@
 import { LinksGroup, LinksGroupProps } from '@/components/LinksGroup';
 import { workspaceRoute } from '@/router';
+import { getRouteParam } from '@/utils/workspaceUtils';
 import { ScrollArea } from '@mantine/core';
 import styles from '@styles/components/Navbar.module.scss';
 import { IconPuzzleFilled } from '@tabler/icons-react';
+import { Link } from '@tanstack/react-router';
 import React from 'react';
 
 export function Navbar() {
@@ -11,10 +13,40 @@ export function Navbar() {
       icon: IconPuzzleFilled,
       label: 'Messages',
       links: [
-        { label: 'User A', to: workspaceRoute.to, search: { privateChat: 'User A' } },
-        { label: 'User B', to: workspaceRoute.to, search: { privateChat: 'User B' } },
-        { label: 'User C', to: workspaceRoute.to, search: { privateChat: 'User C' } },
-        { label: 'All messages', to: workspaceRoute.to, search: { chatList: true } },
+        {
+          label: 'User A',
+          component: (
+            <Link
+              to={workspaceRoute.to}
+              params={{ routeParamName: getRouteParam('privateChat') }}
+              search={{ userName: 'User A' }}
+            />
+          ),
+        },
+        {
+          label: 'User B',
+          component: (
+            <Link
+              to={workspaceRoute.to}
+              params={{ routeParamName: getRouteParam('privateChat') }}
+              search={{ userName: 'User B' }}
+            />
+          ),
+        },
+        {
+          label: 'User C',
+          component: (
+            <Link
+              to={workspaceRoute.to}
+              params={{ routeParamName: getRouteParam('privateChat') }}
+              search={{ userName: 'User C' }}
+            />
+          ),
+        },
+        {
+          label: 'All messages',
+          component: <Link to={workspaceRoute.to} params={{ routeParamName: getRouteParam('chatList') }} />,
+        },
       ],
     },
   ];
